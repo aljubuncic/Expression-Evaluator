@@ -90,11 +90,36 @@ public class  ExpressionEvaluator {
      * @return Integer
      */
     public Double evaluate(String expression){
-        Double result =null;
+        this.validate(expression);
         for(String s : expression.split(" ")){
+            if(s.equals("(")) ;
+            else if(s.equals("+") || s.equals("-") || s.equals("*") || s.equals("/") || s.equals("sqrt"))
+                operatorStack.push(s);
+            else if(s.equals(")")){
+                String operator = operatorStack.pop();
+                Double firstOperand = operandStack.pop();
+                switch (operator) {
+                    case "+":
+                        operandStack.push(firstOperand + operandStack.pop());
+                        break;
+                    case "-":
+                        operandStack.push(firstOperand - operandStack.pop());
+                        break;
+                    case "*":
+                        operandStack.push(firstOperand * operandStack.pop());
+                        break;
+                    case "/":
+                        operandStack.push(firstOperand / operandStack.pop());
+                        break;
+                    case "sqrt":
+                        operandStack.push(Math.sqrt(firstOperand));
 
+                        break;
+                }
+            }
+            else operandStack.push(Double.parseDouble(s));
         }
-        return result;
+        return operandStack.pop();
     }
     public void validate(String expression) {
         ArrayList<String> stringsSeparatedBySpace = new ArrayList<>(Arrays.asList(expression.split(" ")));

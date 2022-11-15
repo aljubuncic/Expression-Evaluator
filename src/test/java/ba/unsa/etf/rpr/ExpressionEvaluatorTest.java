@@ -30,4 +30,16 @@ public class ExpressionEvaluatorTest {
     void validateTest6(){
         assertThrows(RuntimeException.class, ()-> new ExpressionEvaluator().validate("( 5 * ( 3 + 2 )"));
     }
+
+    @Test
+    void validateTest7(){
+        assertThrows(RuntimeException.class,()->new ExpressionEvaluator().validate("()"));
+    }
+
+    @Test
+    void evaluateTest1(){
+        assertEquals(101,new ExpressionEvaluator().evaluate("( 1 + ( ( 2 + 3 ) * ( 4 * 5 ) ) )"));
+    }
+
+
 }
