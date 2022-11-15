@@ -4,15 +4,15 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Stack;
 
-public class ExpressionEvaluator {
-    private Stack<Integer> operandStack;
+public class  ExpressionEvaluator {
+    private Stack<Double> operandStack;
     private Stack<String> operatorStack;
 
     /**
      * checks if expression is parenthesized from the outer sides
      */
-    private void isParenthesizedFromOuterSides(String expression){
-        if(expression.charAt(0) != '(' || expression.charAt(expression.length()-1)!= ')')
+    private void isParenthesizedFromOuterSides(ArrayList<String> stringsSeparatedBySpace){
+        if(!stringsSeparatedBySpace.get(0).equals ("(") || !stringsSeparatedBySpace.get(stringsSeparatedBySpace.size()-1).equals( ")"))
             throw new RuntimeException();
     }
 
@@ -44,10 +44,14 @@ public class ExpressionEvaluator {
     }
 
     /**
-     * checks if expression includes at least two numbers
+     * checks if expression includes at least two numbers,
+     * excludes the case when there is only one sqrt function representing the one expression
+     * e.g. "( sqrt ( 5 ) )" or "( ( sqrt ( 5 ) ) * ( sqrt ( 3 ) ) )
      */
     private void doesHaveAtLeastTwoNumbers(ArrayList<String> stringsSeparatedBySpace) {
         int counterOfNumbers = 0;
+        if(stringsSeparatedBySpace.contains("sqrt"))
+           return;
         for (String s : stringsSeparatedBySpace) {
             if (Character.isDigit(s.charAt(0)))
                 counterOfNumbers++;
@@ -81,7 +85,8 @@ public class ExpressionEvaluator {
     }
 
     /**
-     * Evaluates the expression and returns an Integer type result.
+     * Evaluates the expression provided in the argument and returns an Integer type result.
+     * @param expression
      * @return Integer
      */
     public Double evaluate(String expression){
@@ -92,11 +97,10 @@ public class ExpressionEvaluator {
         return result;
     }
     public void validate(String expression) {
-        isParenthesizedFromOuterSides(expression);
-        doesContainInvalidCharacters(expression);
-
         ArrayList<String> stringsSeparatedBySpace = new ArrayList<>(Arrays.asList(expression.split(" ")));
 
+        isParenthesizedFromOuterSides(stringsSeparatedBySpace);
+        doesContainInvalidCharacters(expression);
         isEverySegmentOfExpressionSeparatedCorrectly(stringsSeparatedBySpace);
         doesHaveAtLeastTwoNumbers(stringsSeparatedBySpace);
         doesHaveEqualNumberOfLeftAndRightParenthesis(stringsSeparatedBySpace);
