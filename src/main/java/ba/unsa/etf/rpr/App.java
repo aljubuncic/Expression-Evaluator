@@ -2,10 +2,6 @@ package ba.unsa.etf.rpr;
 
 import java.lang.String;
 
-/**
- * Hello world!
- *
- */
 public class App 
 {
     public static void main( String[] args )
@@ -14,9 +10,7 @@ public class App
         try{
             StringBuilder s = new StringBuilder();
             for (String arg : args)
-                s.append(arg).append(" ");
-            e.validate(s.toString());
-            System.out.println("Expression is valid");
+                s.append(arg);
             System.out.println("Result of the expression is " + e.evaluate(s.toString()));
         }
         catch(RuntimeException r){
