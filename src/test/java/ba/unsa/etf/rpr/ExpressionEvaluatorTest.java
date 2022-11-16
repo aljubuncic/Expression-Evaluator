@@ -33,7 +33,12 @@ public class ExpressionEvaluatorTest {
 
     @Test
     void validateTest7(){
-        assertThrows(RuntimeException.class,()->new ExpressionEvaluator().validate("()"));
+        assertThrows(RuntimeException.class,()->new ExpressionEvaluator().validate("( )"));
+    }
+
+    @Test
+    void validateTest10(){
+        assertThrows( RuntimeException.class,()-> new ExpressionEvaluator().evaluate("( ( ( 5 + 3 ) ) )"));
     }
 
     @Test
@@ -42,4 +47,12 @@ public class ExpressionEvaluatorTest {
     }
 
 
+    @Test
+    void validateTest8(){
+        assertThrows(RuntimeException.class,()->new ExpressionEvaluator().validate("( ( 3 + -456 ) + 76 )"));
+    }
+    @Test
+    void validateTest9(){
+        assertThrows(RuntimeException.class ,() -> new ExpressionEvaluator().evaluate("( 2 + 78 / 3 )"));
+    }
 }
