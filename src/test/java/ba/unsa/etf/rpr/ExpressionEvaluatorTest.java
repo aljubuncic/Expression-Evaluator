@@ -7,15 +7,15 @@ import static org.junit.jupiter.api.Assertions.*;
 public class ExpressionEvaluatorTest {
     @Test
     void validateTest1(){
-        assertThrows(java.lang.RuntimeException.class, () -> new ExpressionEvaluator().evaluate(""));
+        assertThrows(java.lang.RuntimeException.class, () -> new ExpressionEvaluator().evaluate(""),"Expression is not parenthesized from outer sides");
     }
     @Test
     void validateTest2(){
-        assertThrows(RuntimeException.class, () -> new ExpressionEvaluator().evaluate("5*3"));
+        assertThrows(RuntimeException.class, () -> new ExpressionEvaluator().evaluate("5*3"),"Expression is not parenthesized from outer sides");
     }
     @Test
     void validateTest3(){
-        assertThrows(RuntimeException.class, () -> new ExpressionEvaluator().evaluate("( 5 *3 )"));
+        assertThrows(RuntimeException.class, () -> new ExpressionEvaluator().evaluate("( 5 *3 )"),"Operand, operator or parenthesis is not separated correctly");
     }
 
     @Test
@@ -24,26 +24,26 @@ public class ExpressionEvaluatorTest {
     }
     @Test
     void validateTest5(){
-        assertThrows(RuntimeException.class, () -> new ExpressionEvaluator().evaluate("( f * 3 )"));
+        assertThrows(RuntimeException.class, () -> new ExpressionEvaluator().evaluate("( f * 3 )"),"Expression contains invalid character(s)");
     }
     @Test
     void validateTest6(){
-        assertThrows(RuntimeException.class, ()-> new ExpressionEvaluator().evaluate("( 5 * ( 3 + 2 )"));
+        assertThrows(RuntimeException.class, ()-> new ExpressionEvaluator().evaluate("( 5 * ( 3 + 2 )"),"Expression does not have equal number of left and right parentheses");
     }
 
     @Test
     void validateTest7(){
-        assertThrows(RuntimeException.class,()->new ExpressionEvaluator().evaluate("( )"));
+        assertThrows(RuntimeException.class,()->new ExpressionEvaluator().evaluate("( )"),"Expression does not have at least two numbers");
     }
 
     @Test
     void validateTest8(){
-        assertThrows(RuntimeException.class,()->new ExpressionEvaluator().evaluate("( ( 3 + -456 ) + 76 )"));
+        assertThrows(RuntimeException.class,()->new ExpressionEvaluator().evaluate("( ( 3 + -456 ) + 76 )"),"Operand, operator or parenthesis is not separated correctly");
     }
 
     @Test
     void validateTest9(){
-        assertThrows( RuntimeException.class,()-> new ExpressionEvaluator().evaluate("( ( ( 5 + 3 ) ) )"));
+        assertThrows( RuntimeException.class,()-> new ExpressionEvaluator().evaluate("( ( ( 5 + 3 ) ) )"),"Expression contains excess parentheses");
     }
     @Test
     void validateTest10(){
