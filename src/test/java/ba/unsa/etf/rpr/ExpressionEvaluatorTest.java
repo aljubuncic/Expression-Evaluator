@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class ExpressionEvaluatorTest {
     @Test
     void validateTest1(){
-        assertThrows(java.lang.RuntimeException.class, () -> new ExpressionEvaluator().evaluate(""),"Expression is not parenthesized from outer sides");
+        assertThrows(java.lang.RuntimeException.class, () -> new ExpressionEvaluator().evaluate("()"),"Operand, operator or parenthesis is not separated correctly");
     }
     @Test
     void validateTest2(){
@@ -48,6 +48,11 @@ public class ExpressionEvaluatorTest {
     @Test
     void validateTest10(){
         assertThrows(RuntimeException.class,()-> new ExpressionEvaluator().evaluate("( 2 / 0 )"),"Division by zero is not allowed");
+    }
+
+    @Test
+    void validateTest11(){
+        assertThrows(RuntimeException.class,()-> new ExpressionEvaluator().evaluate(""),"Empty xpression");
     }
 
     @Test
