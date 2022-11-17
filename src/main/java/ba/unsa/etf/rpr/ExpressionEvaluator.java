@@ -10,16 +10,19 @@ public class  ExpressionEvaluator {
 
     /**
      * Validates the specified arithmetic expression.
-     * Does not include cases of excess parenthesis or division by zero.
+     * Does not include cases of excess parentheses or division by zero.
      * @param expression
      */
     private void validate(String expression) {
+        if(expression.isEmpty())
+            throw new RuntimeException("Empty expression");
+
         ArrayList<String> stringsSeparatedBySpace = new ArrayList<>(Arrays.asList(expression.split(" ")));
 
-        isParenthesizedFromOuterSides(stringsSeparatedBySpace);
-        doesContainInvalidCharacters(expression);
         isEverySegmentOfExpressionSeparatedCorrectly(stringsSeparatedBySpace);
+        isParenthesizedFromOuterSides(stringsSeparatedBySpace);
         doesHaveAtLeastTwoNumbers(stringsSeparatedBySpace);
+        doesContainInvalidCharacters(expression);
         doesHaveEqualNumberOfLeftAndRightParentheses(stringsSeparatedBySpace);
     }
 
@@ -34,7 +37,6 @@ public class  ExpressionEvaluator {
 
     /**
      * Checks if expression contains characters that are not "(", ")","+","-","*","/","sqrt".
-     *
      * @param expression
      */
 
@@ -49,7 +51,6 @@ public class  ExpressionEvaluator {
     /**
      * Checks if every segment (parenthesis, operator or operand) of expression
      * is correctly separated from each other by a space character.
-     *
      * @param stringsSeparatedBySpace
      */
     private void isEverySegmentOfExpressionSeparatedCorrectly(ArrayList<String> stringsSeparatedBySpace) {
@@ -104,7 +105,6 @@ public class  ExpressionEvaluator {
 
     /**
      * Checks if the provided string represents any of the operators "+" "-" "*" "/" "sqrt".
-     *
      * @param s
      * @return boolean
      */
@@ -114,7 +114,6 @@ public class  ExpressionEvaluator {
 
     /**
      * Performs an arithmetic operation specified by operator with the specified operand(s).
-     *
      * @param secondOperand
      * @param operator
      */
@@ -152,7 +151,6 @@ public class  ExpressionEvaluator {
     /**
      * Evaluates the expression provided in the argument and returns an Integer type result.
      * Throws RuntimeException if there are excess parentheses or division by zero.
-     *
      * @param expression
      * @return Integer
      */
