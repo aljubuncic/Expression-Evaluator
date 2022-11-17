@@ -57,7 +57,7 @@ public class  ExpressionEvaluator {
 
         for (String s : stringsSeparatedBySpace) {
             try {
-                Integer.parseInt(s);
+                Double.parseDouble(s);
                 if (s.charAt(0) == '+' || s.charAt(0) == '-')
                     throw new NumberFormatException();
             } catch (NumberFormatException n) {
@@ -152,7 +152,7 @@ public class  ExpressionEvaluator {
      * Evaluates the expression provided in the argument and returns an Integer type result.
      * Throws RuntimeException if there are excess parentheses or division by zero.
      * @param expression
-     * @return Integer
+     * @return Double
      */
     public Double evaluate(String expression) {
         this.validate(expression.trim());
