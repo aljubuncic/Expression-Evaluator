@@ -11,7 +11,6 @@ public class  ExpressionEvaluator {
     /**
      * Validates the specified arithmetic expression.
      * Does not include cases of excess parenthesis or division by zero.
-     *
      * @param expression
      */
     private void validate(String expression) {
@@ -26,12 +25,11 @@ public class  ExpressionEvaluator {
 
     /**
      * Checks if expression is parenthesized from the outer sides.
-     *
      * @param stringsSeparatedBySpace
      */
     private void isParenthesizedFromOuterSides(ArrayList<String> stringsSeparatedBySpace) {
         if (!stringsSeparatedBySpace.get(0).equals("(") || !stringsSeparatedBySpace.get(stringsSeparatedBySpace.size() - 1).equals(")"))
-            throw new RuntimeException();
+            throw new RuntimeException("Expression is not parenthesized from outer sides");
     }
 
     /**
@@ -45,7 +43,7 @@ public class  ExpressionEvaluator {
                 !(expression.contains("+") || expression.contains("-")
                         || expression.contains("*") || expression.contains("/")
                         || expression.contains("sqrt")))
-            throw new RuntimeException();
+            throw new RuntimeException("Expression contains invalid character(s)");
     }
 
     /**
@@ -63,7 +61,7 @@ public class  ExpressionEvaluator {
                     throw new NumberFormatException();
             } catch (NumberFormatException n) {
                 if (s.length() != 1 && !s.equals("sqrt"))
-                    throw new RuntimeException();
+                    throw new RuntimeException("Operand, operator or parenthesis is not separated correctly");
             }
         }
     }
@@ -71,7 +69,7 @@ public class  ExpressionEvaluator {
     /**
      * Checks if expression includes at least two numbers.
      * Excludes the case when there is only one sqrt function representing the one expression
-     * e.g. "( sqrt 5  )" or "( sqrt 5 ) * ( sqrt 3 )"
+     * e.g. "( sqrt 5 )" or "( sqrt 5 ) * ( sqrt 3 )"
      * @param stringsSeparatedBySpace
      */
     private void doesHaveAtLeastTwoNumbers(ArrayList<String> stringsSeparatedBySpace) {
@@ -84,7 +82,7 @@ public class  ExpressionEvaluator {
                 counterOfNumbers++;
         }
         if (counterOfNumbers < 2)
-            throw new RuntimeException();
+            throw new RuntimeException("Expression does not have at least two numbers");
     }
 
     /**
@@ -101,7 +99,7 @@ public class  ExpressionEvaluator {
                 numOfRightParenthesis++;
         }
         if (!numOfLeftParenthesis.equals(numOfRightParenthesis))
-            throw new RuntimeException();
+            throw new RuntimeException("Expression does not have equal number of left and right parentheses");
     }
 
     /**
@@ -168,7 +166,7 @@ public class  ExpressionEvaluator {
                 if (operatorStack.isEmpty())
                     // if this is true then it means there are excess parentheses which is invalid expression
                     // e.g. ( ( 6 + 9 ) )
-                    throw new RuntimeException();
+                    throw new RuntimeException("Expression contains excess parentheses");
                 String operator = operatorStack.pop();
                 Double secondOperand = operandStack.pop();
                 performAnArithmeticOperation(secondOperand, operator);
