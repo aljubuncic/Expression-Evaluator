@@ -52,7 +52,7 @@ public class ExpressionEvaluatorTest {
 
     @Test
     void validateTest11(){
-        assertThrows(RuntimeException.class,()-> new ExpressionEvaluator().evaluate(""),"Empty xpression");
+        assertThrows(RuntimeException.class,()-> new ExpressionEvaluator().evaluate(""),"Empty expression");
     }
 
     @Test
