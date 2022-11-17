@@ -70,4 +70,8 @@ public class ExpressionEvaluatorTest {
     void evaluateTest5(){
         assertEquals(0, new ExpressionEvaluator().evaluate("( 0 / ( 5 / 7 ) )"));
     }
+    @Test
+    void evaluateTest6(){
+        assertEquals(2, new ExpressionEvaluator().evaluate(" ( sqrt ( sqrt 16 ) )"));
+    }
 }
