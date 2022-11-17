@@ -15,6 +15,7 @@ public class App
         }
         catch(RuntimeException r){
             System.out.println("Expression is not valid");
+            System.out.println("Cause: " + r.getMessage());
         }
 
     }
