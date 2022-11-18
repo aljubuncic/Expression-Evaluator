@@ -27,7 +27,7 @@ public class  ExpressionEvaluator {
     }
 
     /**
-     * Checks the expressions which have the form of "sqrt(n)" where n is a number or another arithmetic expression.
+     * Checks if the expression is form of "sqrt(n)" where n is a number or another arithmetic expression.
      * @param stringsSeparatedBySpace
      * @return boolean
      */
@@ -49,7 +49,7 @@ public class  ExpressionEvaluator {
      * @param stringsSeparatedBySpace
      */
     private void isParenthesizedFromOuterSides(ArrayList<String> stringsSeparatedBySpace) {
-        //The only case when expression can be without parentheses is in expressions like "sqrt(n)"
+        //The only case when expression can be without parentheses at outer sides is in expressions like "sqrt(n)"
         if(hasSqrtAsTheMainOperatorInTheExpression(stringsSeparatedBySpace))
             return;
         if (!stringsSeparatedBySpace.get(0).equals("(") || !stringsSeparatedBySpace.get(stringsSeparatedBySpace.size() - 1).equals(")"))
