@@ -61,7 +61,7 @@ public class ExpressionEvaluatorTest {
     }
     @Test
     void evaluateTest2(){
-        assertEquals(2,new ExpressionEvaluator().evaluate("( sqrt 4 )"));
+        assertEquals(2,new ExpressionEvaluator().evaluate(" sqrt ( 4 ) "));
     }
     @Test
     void evaluateTest3(){
